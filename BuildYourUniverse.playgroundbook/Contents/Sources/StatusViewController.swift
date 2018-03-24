@@ -18,6 +18,7 @@ public class StatusViewController: UIViewController {
     // MARK: - Properties
     private var messageHideTimer: Timer?
     private var displayDuration = TimeInterval(5)
+    
     // MARK: - Message Handling
     public func show(message: String) {
         messageHideTimer?.invalidate()

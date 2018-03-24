@@ -5,7 +5,7 @@ import PlaygroundSupport
 @objc(SceneViewController)
 @available(iOS 11.0, *)
 public class SceneViewController: UIViewController {
-    
+    // MARK: - Outlets
     @IBOutlet weak var sceneView: ARSCNView! {
         didSet{
             sceneView.delegate = self
@@ -23,6 +23,7 @@ public class SceneViewController: UIViewController {
     public let touchOnSun = "OH! Doesn't hurt? ☀️🔥"
     public let tooSpeed = "Too Speed 🏎"
     public let tooSlow = "Too Slow 🐌"
+    public let somethingIsMissing = "Something is missing 🧐"
     
     // View controller that handles the display of user hints on screen
     lazy var statusViewController: StatusViewController = {
@@ -68,99 +69,6 @@ public class SceneViewController: UIViewController {
                                   ARSCNDebugOptions.showWorldOrigin]
         sceneView.session.run(configuration ,options: [.resetTracking, .removeExistingAnchors])
     }
-    
-    // MARK: - Functions
-    func createSun(radius: CGFloat, position: SCNVector3) {
-        // TODO: Check on value
-        // TODO: Add only after that the scanning is completed
-        let sun = SCNNode(geometry: SCNSphere(radius: radius))
-        sun.name = "Sun"
-        sun.position = position
-        // Check if there is another sun, and replace it with the new one
-        if let sunEx = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) {
-            self.sceneView.scene.rootNode.replaceChildNode(sunEx, with: sun)
-        } else {
-            self.sceneView.scene.rootNode.addChildNode(sun)
-        }
-    }
-    
-    func setTexture() {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
-            statusViewController.show(message: whereIsTheSun)
-            return
-        }
-        sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "SunTexture.jpg")
-    }
-    
-    // Give rotation to Sun
-    func setSpeedRotation(speedRotation: Int){
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
-            statusViewController.show(message: whereIsTheSun)
-            return
-        }
-        // Do a check on values
-        if speedRotation < 1 {
-            statusViewController.show(message: tooSpeed)
-            return
-        } else if  speedRotation > 15 {
-            statusViewController.show(message: tooSlow)
-            return
-        }
-        
-        self.speedRotation = speedRotation
-        let sunAction = Rotation(time: TimeInterval(self.speedRotation))
-        // If there is a previous action I'll remove it
-        if sun.hasActions {
-            sun.removeAction(forKey: "sunRotation")
-        }
-        sun.runAction(sunAction, forKey: "sunRotation")
-    }
-    
-    func Rotation(time: TimeInterval) -> SCNAction {
-        let Rotation = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: time)
-        let foreverRotation = SCNAction.repeatForever(Rotation)
-        return foreverRotation
-    }
-    
-    // MARK: - Handle Gesture Recognizer
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        let sceneViewTappedOn = sender.view as! SCNView
-        let touchCoordinates = sender.location(in: sceneViewTappedOn)
-        let hitTest = sceneViewTappedOn.hitTest(touchCoordinates)
-        if !hitTest.isEmpty {
-            let resultName = hitTest.first!.node.name
-            switch resultName {
-            case "Sun"?:
-                statusViewController.show(message: touchOnSun);
-            default:
-                break;
-            }
-        }
-    }
-    
-    // Increase the speed of The sun
-    @objc func handleSwipeRight(sender: UISwipeGestureRecognizer) {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
-            return
-        }
-        if sun.hasActions {
-            self.speedRotation += 1
-            setSpeedRotation(speedRotation: self.speedRotation)
-        }
-    }
-    
-    // Decrease the speed of the sun
-    @objc func handleSwipeLeft(sender: UISwipeGestureRecognizer) {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
-            return
-        }
-        if !sun.hasActions {
-            setSpeedRotation(speedRotation: 10)
-        } else {
-            self.speedRotation += -1
-            setSpeedRotation(speedRotation: self.speedRotation)
-        }
-    }
 }
 
 // MARK: - Extension Int
@@ -168,7 +76,7 @@ extension Int {
     var degreesToRadians: Double { return Double(self) * .pi/180 }
 }
 
-// MARK: Extension
+// MARK: Extension Message Handler
 @available(iOS 11.0, *)
 extension SceneViewController: PlaygroundLiveViewMessageHandler {
     public func receive(_ message: PlaygroundValue) {
@@ -179,12 +87,39 @@ extension SceneViewController: PlaygroundLiveViewMessageHandler {
         switch liveViewMessage {
         case let .createSun(radius: radius, position: position):
             createSun(radius: radius, position: position);
-        case .setTexture:
-            setTexture();
-        case let .setSpeedRotation(speedRotation: speedRotation):
-            setSpeedRotation(speedRotation: speedRotation);
+        case .setTextureToSun:
+            setTextureToSun();
+        case let .setSpeedRotationToSun(speedRotation: speedRotation):
+            setSpeedRotationToSun(speedRotation: speedRotation);
+        case .createParentEarth:
+            createParentEarth();
+        case .createEarthWithTexturesAndRotation:
+            createEarthWithTexturesAndRotation();
+        case .createMoon:
+            createMoon();
         default:
             break
+        }
+    }
+}
+
+// MARK: Extension ARSCNDelegate
+@available(iOS 11.0, *)
+extension SceneViewController: ARSCNViewDelegate, ARSessionDelegate {
+    
+    public func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        // Give to the user some hints based on the tracking state
+        switch camera.trackingState {
+        case .notAvailable:
+            statusViewController.show(message: trackingNotAvailable )
+        case .limited(.insufficientFeatures):
+            statusViewController.show(message: featureMissingMessage)
+        case .limited(.excessiveMotion):
+            statusViewController.show(message: excessiveMotionMessage)
+        case .normal:
+            statusViewController.show(message: scanEnvoiroment)
+        default:
+            break;
         }
     }
 }

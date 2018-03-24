@@ -25,12 +25,12 @@ let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
 
 func startTimeTravel() {
     proxy?.send(MessageFromContentsToLiveView.startTimeTravel.playgroundValue)
+    //TODO: Right Hint
+    page.assessmentStatus = .pass(message: "You Did it!")
 }
-
 //#-code-completion(everything, hide)
 //#-code-completion(identifier, show, startTimeTravel())
 //#-end-hidden-code
 //#-editable-code
 
 //#-end-editable-code
-

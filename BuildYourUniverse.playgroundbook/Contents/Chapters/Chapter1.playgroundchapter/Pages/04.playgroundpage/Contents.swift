@@ -1,17 +1,7 @@
 /*:
+ Costruiamo la terra
  
- Here there will be a breif introduction about the playground book
- 
- ## **This is Big Bold**
- 
- Normal
- 
- `Corsivo`.
- 
- **Bold**:
- 
- *Simple bold*!
- 
+ Richiamare il codice scritto prima
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -21,6 +11,14 @@ import ARKit
 let page = PlaygroundPage.current
 page.needsIndefiniteExecution = true
 let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
+
+func createParentEarth() {
+    proxy?.send(MessageFromContentsToLiveView.createParentEarth.playgroundValue)
+}
+
+func createEarthWithTexturesAndRotation() {
+    proxy?.send(MessageFromContentsToLiveView.createEarthWithTexturesAndRotation.playgroundValue)
+}
 
 func createSun(radius: CGFloat, position: SCNVector3) {
     proxy?.send(MessageFromContentsToLiveView.createSun(radius: radius, position: position).playgroundValue)
@@ -32,6 +30,10 @@ func setTextureToSun() {
 
 func setSpeedRotationToSun(speedRotation: Int) {
     proxy?.send(MessageFromContentsToLiveView.setSpeedRotationToSun(speedRotation: speedRotation).playgroundValue)
+}
+
+func createMoon() {
+    proxy?.send(MessageFromContentsToLiveView.createMoon.playgroundValue)
 }
 
 // Handle messages from the live view.
@@ -52,9 +54,13 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
 let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, createSun(radius:position:), setSpeedRotationToSun(speedRotation:), setTextureToSun())
-//#-code-completion(identifier, show, SCNVector3)
+//#-code-completion(identifier, show, createMoon())
 //#-end-hidden-code
+createSun(radius: 0.35, position: SCNVector3(0,0,-1))
+setTextureToSun()
+setSpeedRotationToSun(speedRotation: 8)
+createParentEarth()
+createEarthWithTexturesAndRotation()
 //#-editable-code
 
 //#-end-editable-code

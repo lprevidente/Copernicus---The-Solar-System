@@ -6,15 +6,21 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
     // List of case
     case startTimeTravel
     case createSun(radius: CGFloat, position: SCNVector3)
-    case setSpeedRotation(speedRotation: Int)
-    case setTexture
+    case setSpeedRotationToSun(speedRotation: Int)
+    case setTextureToSun
+    case createParentEarth
+    case createEarthWithTexturesAndRotation
+    case createMoon
     
     // Create a Enumeration
     public enum MessageType: String, PlaygroundMessageType {
         case startTimeTravel
         case createSun
-        case setSpeedRotation
-        case setTexture
+        case setSpeedRotationToSun
+        case setTextureToSun
+        case createParentEarth
+        case createEarthWithTexturesAndRotation
+        case createMoon
     }
     
     // Define the type of message that I can have
@@ -22,12 +28,25 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         switch self {
         case .startTimeTravel:
             return .startTimeTravel
+            
         case .createSun(radius:position:):
             return .createSun
-        case .setTexture:
-            return .setTexture
-        case .setSpeedRotation(speedRotation:):
-            return .setSpeedRotation
+            
+        case .setTextureToSun:
+            return .setTextureToSun
+            
+        case .setSpeedRotationToSun(speedRotation:):
+            return .setSpeedRotationToSun
+            
+        case .createParentEarth:
+            return .createParentEarth
+            
+        case .createEarthWithTexturesAndRotation:
+            return .createEarthWithTexturesAndRotation
+        
+        case .createMoon:
+            return .createMoon
+            
         }
     }
     
@@ -49,16 +68,26 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
             }
             self = .createSun(radius: parameters.radius, position: parameters.position);
             
-        case .setTexture:
-            self = .setTexture
+        case .setTextureToSun:
+            self = .setTextureToSun
             
-        case .setSpeedRotation:
+        case .setSpeedRotationToSun:
             guard let parametersEncoded = parametersEncoded,
                   let parameters = try? decoder.decode(setSpeedRotationParameters.self, from: parametersEncoded)
             else {
                 return nil
             }
-            self = .setSpeedRotation(speedRotation: parameters.speedRotation)
+            self = .setSpeedRotationToSun(speedRotation: parameters.speedRotation)
+            
+        case .createParentEarth:
+            self = .createParentEarth
+            
+        case .createEarthWithTexturesAndRotation:
+            self = .createEarthWithTexturesAndRotation
+        
+        case .createMoon:
+            self = .createMoon
+
         }
     }
     
@@ -75,12 +104,22 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
             let parameters = createSunParameters(radius: radius, position: position)
             return try! encoder.encode(parameters)
             
-        case .setTexture:
+        case .setTextureToSun:
             return nil;
             
-        case let .setSpeedRotation(speedRotation: speedRotation):
+        case let .setSpeedRotationToSun(speedRotation: speedRotation):
             let parameters = setSpeedRotationParameters(speedRotation: speedRotation)
             return try! encoder.encode(parameters)
+            
+        case .createParentEarth:
+            return nil
+            
+        case .createEarthWithTexturesAndRotation:
+            return nil
+            
+        case .createMoon:
+            return nil
+        
         }
     }
 }
