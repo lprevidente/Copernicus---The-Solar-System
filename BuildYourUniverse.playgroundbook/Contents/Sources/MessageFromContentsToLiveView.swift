@@ -11,6 +11,7 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
     case createParentEarth
     case createEarthWithTexturesAndRotation
     case createMoon
+    case createSolarSystem
     
     // Create a Enumeration
     public enum MessageType: String, PlaygroundMessageType {
@@ -21,6 +22,7 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case createParentEarth
         case createEarthWithTexturesAndRotation
         case createMoon
+        case createSolarSystem
     }
     
     // Define the type of message that I can have
@@ -46,6 +48,9 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         
         case .createMoon:
             return .createMoon
+            
+        case .createSolarSystem:
+            return .createSolarSystem
             
         }
     }
@@ -87,6 +92,9 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         
         case .createMoon:
             self = .createMoon
+            
+        case .createSolarSystem:
+            self = .createSolarSystem
 
         }
     }
@@ -120,6 +128,8 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case .createMoon:
             return nil
         
+        case .createSolarSystem:
+            return nil
         }
     }
 }

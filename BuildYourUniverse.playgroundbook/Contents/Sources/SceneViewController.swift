@@ -97,6 +97,8 @@ extension SceneViewController: PlaygroundLiveViewMessageHandler {
             createEarthWithTexturesAndRotation();
         case .createMoon:
             createMoon();
+        case .createSolarSystem:
+            createSolarSystem();
         default:
             break
         }

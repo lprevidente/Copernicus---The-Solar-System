@@ -36,6 +36,10 @@ func createMoon() {
     proxy?.send(MessageFromContentsToLiveView.createMoon.playgroundValue)
 }
 
+func createSolarSystem(){
+    proxy?.send(MessageFromContentsToLiveView.createSolarSystem.playgroundValue)
+}
+
 // Handle messages from the live view.
 class Listener: PlaygroundRemoteLiveViewProxyDelegate {
     func remoteLiveViewProxy(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy,
@@ -54,13 +58,13 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
 let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, createMoon())
+//#-code-completion(identifier, show, createMoon(), createSolarSystem())
 //#-end-hidden-code
-createSun(radius: 0.35, position: SCNVector3(0,0,-1))
-setTextureToSun()
-setSpeedRotationToSun(speedRotation: 8)
-createParentEarth()
-createEarthWithTexturesAndRotation()
+//createSun(radius: 0.35, position: SCNVector3(0,0,-1))
+//setTextureToSun()
+//setSpeedRotationToSun(speedRotation: 8)
+//createParentEarth()
+//createEarthWithTexturesAndRotation()
 //#-editable-code
 
 //#-end-editable-code

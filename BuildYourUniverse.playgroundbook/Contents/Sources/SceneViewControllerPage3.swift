@@ -13,7 +13,7 @@ extension SceneViewController {
         earthParent.name = "earthParent"
         earthParent.position = sun.position
         
-        let earthParentRotation = Rotation(time: 14)
+        let earthParentRotation = Rotation(time: 10)
         earthParent.runAction(earthParentRotation)
         
         if let earthParentEx = self.sceneView.scene.rootNode.childNode(withName: "earthParent", recursively: false) {
@@ -29,12 +29,14 @@ extension SceneViewController {
             statusViewController.show(message: somethingIsMissing)
             return
         }
-        let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: UIImage(named: "EarthTexture.jpg")!, specular: UIImage(named: "EarthSpecular.tif")!, emission: UIImage(named: "EarthCloudsTexture.jpg")!, normal: UIImage(named: "EarthNormal.tif")!, position: SCNVector3(1.2 ,0 , 0))
+        
+        let earth = planet(geometry: SCNSphere(radius: 0.1), diffuse: UIImage(named: "EarthTexture.jpg")!, specular: UIImage(named: "EarthSpecular.tif")!, emission: UIImage(named: "EarthCloudsTexture.jpg")!, normal: UIImage(named: "EarthNormal.tif")!, position: SCNVector3(0.8,0,0))
+        
         earth.name = "Earth"
-        let earthRotation = Rotation(time: 8)
+        let earthRotation = Rotation(time: 7)
         earth.runAction(earthRotation)
         
-        if let earthEx = self.sceneView.scene.rootNode.childNode(withName: "Earth", recursively: false) {
+        if let earthEx = earthParent.childNode(withName: "Earth", recursively: false) {
            earthParent.replaceChildNode(earthEx, with: earth)
         } else {
            earthParent.addChildNode(earth)
