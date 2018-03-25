@@ -10,10 +10,10 @@ extension SceneViewController {
         // TODO: Check on value
         // TODO: Add only after that the scanning is completed
         let sun = SCNNode(geometry: SCNSphere(radius: radius))
-        sun.name = "Sun"
+        sun.name = sunName
         sun.position = position
         // Check if there is another sun, and replace it with the new one
-        if let sunEx = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) {
+        if let sunEx = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) {
             self.sceneView.scene.rootNode.replaceChildNode(sunEx, with: sun)
         } else {
             self.sceneView.scene.rootNode.addChildNode(sun)
@@ -21,11 +21,11 @@ extension SceneViewController {
     }
     
     func setTextureToSun() {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
+        guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)
             return
         }
-        sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "SunTexture.jpg")
+        sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "\(sunName)Texture.jpg")
         
         if sun.hasActions {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
@@ -34,7 +34,7 @@ extension SceneViewController {
     
     // Give rotation to Sun
     func setSpeedRotationToSun(speedRotation: Int){
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
+        guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)
             return
         }
@@ -51,9 +51,9 @@ extension SceneViewController {
         let sunAction = Rotation(time: TimeInterval(self.speedRotation))
         // If there is a previous action I'll remove it
         if sun.hasActions {
-            sun.removeAction(forKey: "sunRotation")
+            sun.removeAction(forKey: "\(sunName)Rotation")
         }
-        sun.runAction(sunAction, forKey: "sunRotation")
+        sun.runAction(sunAction, forKey: "\(sunName)Rotation")
         if (sun.geometry?.firstMaterial?.diffuse.contents) != nil {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
         }
@@ -73,9 +73,14 @@ extension SceneViewController {
         if !hitTest.isEmpty {
             let resultName = hitTest.first!.node.name
             switch resultName {
-            case "Sun"?:
+            case sunName?:
                 statusViewController.show(message: touchOnSun);
             default:
+                for planet in planets {
+                    if planet == resultName {
+                        statusViewController.show(message: "\(touchOn) \(planet)")
+                    }
+                }
                 break;
             }
         }
@@ -83,7 +88,7 @@ extension SceneViewController {
     
     // Increase the speed of The sun
     @objc func handleSwipeRight(sender: UISwipeGestureRecognizer) {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
+        guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             return
         }
         if sun.hasActions {
@@ -94,7 +99,7 @@ extension SceneViewController {
     
     // Decrease the speed of the sun
     @objc func handleSwipeLeft(sender: UISwipeGestureRecognizer) {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
+        guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             return
         }
         if !sun.hasActions {

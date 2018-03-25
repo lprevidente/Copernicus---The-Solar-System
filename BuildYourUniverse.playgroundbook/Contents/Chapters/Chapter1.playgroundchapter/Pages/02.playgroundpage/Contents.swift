@@ -52,9 +52,10 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
 let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, createSun(radius:position:), setSpeedRotationToSun(speedRotation:), setTextureToSun())
-//#-code-completion(identifier, show, SCNVector3)
+//#-code-completion(identifier, show, setSpeedRotationToSun(speedRotation:), setTextureToSun())
+//#-code-completion(identifier, show, 0.35, 0)
 //#-end-hidden-code
+createSun(radius:/*#-editable-code 0.35*//*#-end-editable-code*/, position: SCNVector3(/*#-editable-code 0*/ /*#-end-editable-code*/,/*#-editable-code 0*/ /*#-end-editable-code*/,/*#-editable-code -1*/ /*#-end-editable-code*/))
 //#-editable-code
 
 //#-end-editable-code

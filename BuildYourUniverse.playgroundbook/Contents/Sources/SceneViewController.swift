@@ -21,9 +21,14 @@ public class SceneViewController: UIViewController {
     public let scanEnvoiroment = "Scan the Environment 📸"
     public let whereIsTheSun = "Where is the sun? ☀️😱"
     public let touchOnSun = "OH! Doesn't hurt? ☀️🔥"
+    public let touchOn = "You have touched "
     public let tooSpeed = "Too Speed 🏎"
     public let tooSlow = "Too Slow 🐌"
     public let somethingIsMissing = "Something is missing 🧐"
+    
+    let sunName = "Sun"
+    // An Array of planets
+    let planets: [String] = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Neptune", "Uranus", "Pluto"]
     
     // View controller that handles the display of user hints on screen
     lazy var statusViewController: StatusViewController = {
@@ -33,7 +38,7 @@ public class SceneViewController: UIViewController {
     var session: ARSession {
         return sceneView.session
     }
-    
+    // Variable to store the information about sun speed
     var speedRotation: Int = 0;
     
     // MARK: - UIViewController
@@ -41,7 +46,7 @@ public class SceneViewController: UIViewController {
         super.viewDidLoad()
         sceneView.autoenablesDefaultLighting = true
         
-        // Add Some Swipe Gesture Reconizer
+        // Add Some Swipe Gesture Reconizer For Rotation and Tap on Element
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         
@@ -68,6 +73,8 @@ public class SceneViewController: UIViewController {
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,
                                   ARSCNDebugOptions.showWorldOrigin]
         sceneView.session.run(configuration ,options: [.resetTracking, .removeExistingAnchors])
+        
+        statusViewController.show(message: scanEnvoiroment)
     }
 }
 
@@ -92,11 +99,9 @@ extension SceneViewController: PlaygroundLiveViewMessageHandler {
         case let .setSpeedRotationToSun(speedRotation: speedRotation):
             setSpeedRotationToSun(speedRotation: speedRotation);
         case .createParentEarth:
-            createParentEarth();
-        case .createEarthWithTexturesAndRotation:
-            createEarthWithTexturesAndRotation();
-        case .createMoon:
-            createMoon();
+            createParentEarth(timeRotation: 10)
+        case .createEarth:
+            createEarth(radius: 0.1, position: SCNVector3(0.8, 0, 0), timeRotation: 7, needTorus: false)
         case .createSolarSystem:
             createSolarSystem();
         default:

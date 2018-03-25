@@ -9,8 +9,7 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
     case setSpeedRotationToSun(speedRotation: Int)
     case setTextureToSun
     case createParentEarth
-    case createEarthWithTexturesAndRotation
-    case createMoon
+    case createEarth
     case createSolarSystem
     
     // Create a Enumeration
@@ -20,8 +19,7 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case setSpeedRotationToSun
         case setTextureToSun
         case createParentEarth
-        case createEarthWithTexturesAndRotation
-        case createMoon
+        case createEarth
         case createSolarSystem
     }
     
@@ -43,12 +41,9 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case .createParentEarth:
             return .createParentEarth
             
-        case .createEarthWithTexturesAndRotation:
-            return .createEarthWithTexturesAndRotation
-        
-        case .createMoon:
-            return .createMoon
-            
+        case .createEarth:
+            return .createEarth
+
         case .createSolarSystem:
             return .createSolarSystem
             
@@ -87,12 +82,9 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case .createParentEarth:
             self = .createParentEarth
             
-        case .createEarthWithTexturesAndRotation:
-            self = .createEarthWithTexturesAndRotation
-        
-        case .createMoon:
-            self = .createMoon
-            
+        case .createEarth:
+            self = .createEarth
+
         case .createSolarSystem:
             self = .createSolarSystem
 
@@ -122,12 +114,9 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
         case .createParentEarth:
             return nil
             
-        case .createEarthWithTexturesAndRotation:
+        case .createEarth:
             return nil
-            
-        case .createMoon:
-            return nil
-        
+
         case .createSolarSystem:
             return nil
         }

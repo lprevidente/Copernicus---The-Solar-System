@@ -1,6 +1,5 @@
 /*:
- Costruiamo la terra
- 
+ Costruiamo l'intero sistema solare
  Richiamare il codice scritto prima
  */
 //#-hidden-code
@@ -11,30 +10,6 @@ import ARKit
 let page = PlaygroundPage.current
 page.needsIndefiniteExecution = true
 let proxy = page.liveView as? PlaygroundRemoteLiveViewProxy
-
-func createParentEarth() {
-    proxy?.send(MessageFromContentsToLiveView.createParentEarth.playgroundValue)
-}
-
-func createEarthWithTexturesAndRotation() {
-    proxy?.send(MessageFromContentsToLiveView.createEarthWithTexturesAndRotation.playgroundValue)
-}
-
-func createSun(radius: CGFloat, position: SCNVector3) {
-    proxy?.send(MessageFromContentsToLiveView.createSun(radius: radius, position: position).playgroundValue)
-}
-
-func setTextureToSun() {
-    proxy?.send(MessageFromContentsToLiveView.setTextureToSun.playgroundValue)
-}
-
-func setSpeedRotationToSun(speedRotation: Int) {
-    proxy?.send(MessageFromContentsToLiveView.setSpeedRotationToSun(speedRotation: speedRotation).playgroundValue)
-}
-
-func createMoon() {
-    proxy?.send(MessageFromContentsToLiveView.createMoon.playgroundValue)
-}
 
 func createSolarSystem(){
     proxy?.send(MessageFromContentsToLiveView.createSolarSystem.playgroundValue)
@@ -58,13 +33,8 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
 let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, createMoon(), createSolarSystem())
+//#-code-completion(identifier, show, createSolarSystem())
 //#-end-hidden-code
-//createSun(radius: 0.35, position: SCNVector3(0,0,-1))
-//setTextureToSun()
-//setSpeedRotationToSun(speedRotation: 8)
-//createParentEarth()
-//createEarthWithTexturesAndRotation()
 //#-editable-code
 
 //#-end-editable-code

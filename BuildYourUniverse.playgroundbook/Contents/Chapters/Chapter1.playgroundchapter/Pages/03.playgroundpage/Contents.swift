@@ -16,8 +16,8 @@ func createParentEarth() {
     proxy?.send(MessageFromContentsToLiveView.createParentEarth.playgroundValue)
 }
 
-func createEarthWithTexturesAndRotation() {
-    proxy?.send(MessageFromContentsToLiveView.createEarthWithTexturesAndRotation.playgroundValue)
+func createEarth() {
+    proxy?.send(MessageFromContentsToLiveView.createEarth.playgroundValue)
 }
 
 func createSun(radius: CGFloat, position: SCNVector3) {
@@ -50,7 +50,7 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
 let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, createEarthWithTexturesAndRotation(), createParentEarth())
+//#-code-completion(identifier, show, createEarth(), createParentEarth())
 //#-end-hidden-code
 createSun(radius: 0.35, position: SCNVector3(0,0,-1))
 setTextureToSun()

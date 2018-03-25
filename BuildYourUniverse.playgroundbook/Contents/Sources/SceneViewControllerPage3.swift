@@ -4,19 +4,22 @@ import UIKit
 @available(iOS 11.0, *)
 extension SceneViewController {
     
-    func createParentEarth() {
-        guard let sun = self.sceneView.scene.rootNode.childNode(withName: "Sun", recursively: false) else {
+    // First I need to create a Parent Node for Earth. Its positions is the center of the Sun
+    func createParentEarth(timeRotation: TimeInterval ) {
+        guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)
             return
         }
         let earthParent = SCNNode()
-        earthParent.name = "earthParent"
+        
+        let earthName: String = planets[2]
+        earthParent.name = "\(earthName)Parent"
         earthParent.position = sun.position
         
-        let earthParentRotation = Rotation(time: 10)
+        let earthParentRotation = Rotation(time: timeRotation)
         earthParent.runAction(earthParentRotation)
         
-        if let earthParentEx = self.sceneView.scene.rootNode.childNode(withName: "earthParent", recursively: false) {
+        if let earthParentEx = self.sceneView.scene.rootNode.childNode(withName: "\(earthName)Parent", recursively: false) {
             self.sceneView.scene.rootNode.replaceChildNode(earthParentEx, with: earthParent)
         } else {
             self.sceneView.scene.rootNode.addChildNode(earthParent)
@@ -24,27 +27,38 @@ extension SceneViewController {
         
     }
     
-    func createEarthWithTexturesAndRotation() {
-        guard let earthParent = self.sceneView.scene.rootNode.childNode(withName: "earthParent", recursively: false) else {
+    // I create the Earth that is a child of node created before
+    func createEarth(radius: CGFloat, position: SCNVector3, timeRotation: TimeInterval, needTorus: Bool) {
+        let earthName: String = planets[2]
+        guard let earthParent = self.sceneView.scene.rootNode.childNode(withName: "\(earthName)Parent", recursively: false) else {
             statusViewController.show(message: somethingIsMissing)
             return
         }
         
-        let earth = planet(geometry: SCNSphere(radius: 0.1), diffuse: UIImage(named: "EarthTexture.jpg")!, specular: UIImage(named: "EarthSpecular.tif")!, emission: UIImage(named: "EarthCloudsTexture.jpg")!, normal: UIImage(named: "EarthNormal.tif")!, position: SCNVector3(0.8,0,0))
+        let earth = createPlanetNode(geometry: SCNSphere(radius: 0.1), diffuse: UIImage(named: "\(earthName)Texture.jpg")!, specular: UIImage(named: "\(earthName)Specular.tif")!, emission: UIImage(named: "\(earthName)CloudsTexture.jpg")!, normal: UIImage(named: "\(earthName)Normal.tif")!, position: SCNVector3(0.8,0,0))
         
-        earth.name = "Earth"
+        earth.name = earthName
         let earthRotation = Rotation(time: 7)
         earth.runAction(earthRotation)
         
-        if let earthEx = earthParent.childNode(withName: "Earth", recursively: false) {
+        if let earthEx = earthParent.childNode(withName: earthName, recursively: false) {
            earthParent.replaceChildNode(earthEx, with: earth)
         } else {
            earthParent.addChildNode(earth)
         }
-        self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
+        
+        if needTorus {
+            let torus =  SCNTorus(ringRadius: CGFloat(earth.position.x) , pipeRadius: 0.001)
+            torus.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.3)
+            let torusNode = SCNNode(geometry: torus)
+            earthParent.addChildNode(torusNode)
+        } else{
+            self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
+        }
     }
     
-    func planet(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SCNNode {
+    // MARK: - Func create Node Planet
+    func createPlanetNode(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SCNNode {
         let planet = SCNNode(geometry: geometry)
         planet.geometry?.firstMaterial?.diffuse.contents = diffuse
         planet.geometry?.firstMaterial?.specular.contents = specular
