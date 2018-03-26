@@ -1,6 +1,12 @@
 /*:
- Costruiamo l'intero sistema solare
- Richiamare il codice scritto prima
+  # **Let's go to discover the Solar System**.
+ Now you have all instruments and acknowledgements to **create** the Solar System.
+ 
+ It has made of eight planets: `Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune`. We add also `Pluto`, it was considered ad planet but now it's a nano-planet.
+ 
+ Explore it all, try to catch the differences between them such as the colours, the velocity of rotation and the sizes.
+ 
+ Now our trip is not ended, remember the life is full of surprise. `Go and look for the one reserved for you.`
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -22,7 +28,7 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         guard let liveViewMessage = MessageFromLiveViewToContents(playgroundValue: message) else { return }
         switch liveViewMessage {
         case .succeeded:
-            page.assessmentStatus = .pass(message: "You Did it!")
+            page.assessmentStatus = .pass(message: "You have complted the book. You are like Nicolaus ")
         default:
             break
         }

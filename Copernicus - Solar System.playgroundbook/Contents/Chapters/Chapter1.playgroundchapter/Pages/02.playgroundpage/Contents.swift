@@ -1,17 +1,14 @@
 /*:
  
- Here there will be a breif introduction about the playground book
+ # **Start from the basis**
  
- ## **This is Big Bold**
+ Venturing in the `De revolutionibus orbium coelestium` (*On the Revolutions of the Heavenly Spheres*), published on 1543, some days before the death of the author, we can discover that the solar system referred to is `Heliocentric`: the center of everything is the Sun, it is fixed and it's 'near' the center of universe. (*Why near?*).
  
- Normal
+ So start to build the *our* solar system:
  
- `Corsivo`.
- 
- **Bold**:
- 
- *Simple bold*!
- 
+ 1. You need to **Create the Sun**.
+ 2. What is a sun without anything? We know that is composed mainly of Hydrogen and Helium, so we need to put them on it. Put a **Texture** on the sun created.
+ 3. It isn't totally fixed, it rotates around its own axis. You have two ways to put it into motion. `Try to discover which are`.
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -41,7 +38,7 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         guard let liveViewMessage = MessageFromLiveViewToContents(playgroundValue: message) else { return }
         switch liveViewMessage {
         case .succeeded:
-            page.assessmentStatus = .pass(message: "You Did it!")
+            page.assessmentStatus = .pass(message: "Now we have a beautiful sun! [Go Next](@next) ")
         default:
             break
         }
@@ -53,9 +50,9 @@ let listener = Listener()
 proxy?.delegate = listener
 //#-code-completion(everything, hide)
 //#-code-completion(identifier, show, setSpeedRotationToSun(speedRotation:), setTextureToSun())
-//#-code-completion(identifier, show, 0.35, 0)
+//#-code-completion(identifier, show)
 //#-end-hidden-code
-createSun(radius:/*#-editable-code 0.35*//*#-end-editable-code*/, position: SCNVector3(/*#-editable-code 0*/ /*#-end-editable-code*/,/*#-editable-code 0*/ /*#-end-editable-code*/,/*#-editable-code -1*/ /*#-end-editable-code*/))
+createSun(radius:/*#-editable-code*/0.35/*#-end-editable-code*/, position: SCNVector3(/*#-editable-code 0*/0/*#-end-editable-code*/,/*#-editable-code */0/*#-end-editable-code*/,/*#-editable-code -1*/-1/*#-end-editable-code*/))
 //#-editable-code
 
 //#-end-editable-code
