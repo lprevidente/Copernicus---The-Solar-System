@@ -41,10 +41,9 @@ extension SceneViewController {
         } else {
             moonParent.addChildNode(moon)
         }
-        
     }
     
-    private func createPlanet(name: String, positionPlanet: SCNVector3, timeRotation: TimeInterval, radius: CGFloat) {
+    private func createPlanet(name: String, positionPlanet: SCNVector3, timeRotation: TimeInterval, radius: CGFloat, hasRings: Bool){
         guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false ) else {
             return
         }
@@ -79,55 +78,66 @@ extension SceneViewController {
         
         // Create a Torus for the orbit
         let torus =  SCNTorus(ringRadius: CGFloat(positionPlanet.x) , pipeRadius: 0.001)
-        torus.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.3)
+        torus.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.3)
         let torusNode = SCNNode(geometry: torus)
         planetParent.addChildNode(torusNode)
+        
+        // Draw rings if it has
+        if hasRings {
+            let ringsNode = SCNNode(geometry: SCNPlane(width: radius * 3.5, height: radius * 3.5))
+            ringsNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "\(name)Rings")
+            ringsNode.position = positionPlanet
+            ringsNode.eulerAngles = SCNVector3(-90.degreesToRadians,0,0)
+            ringsNode.runAction(planetRotation)
+            planetParent.addChildNode(ringsNode)
+        }
+
     }
     
     func createSolarSystem() {
         // Sun
-        createSun(radius: 0.25, position: SCNVector3(-0.5,-0.5,-1));
+        createSun(radius: 0.35, position: SCNVector3(-0.5,-0.5,-1));
         setTextureToSun();
         setSpeedRotationToSun(speedRotation: 3)
         
         // Mercury
         let mercuryName = planets[0]
-        createPlanet(name: mercuryName , positionPlanet: SCNVector3(0.4,0,0), timeRotation: 6, radius: 0.03 )
+        createPlanet(name: mercuryName , positionPlanet: SCNVector3(0.6,0,0), timeRotation: 6, radius: 0.05, hasRings: false)
         
         // Venus
         let venusName = planets[1]
-        createPlanet(name: venusName, positionPlanet: SCNVector3(0.6,0,0), timeRotation: 8, radius: 0.04 )
+        createPlanet(name: venusName, positionPlanet: SCNVector3(0.8,0,0), timeRotation: 8, radius: 0.04, hasRings: false)
         
         // Earth
         createParentEarth(timeRotation: 10)
-        createEarth(radius: 0.1, position: SCNVector3(0.8, 0, 0), timeRotation: 7, needTorus: true)
+        createEarth(radius: 0.08, position: SCNVector3(1.1, 0, 0), timeRotation: 7, needTorus: true)
         
         // Create Moon
-        createMoon(radius: 0.01, position: SCNVector3(0, 0, 0.12), timeRotation: 5);
+        createMoon(radius: 0.02, position: SCNVector3(0, 0, 0.2), timeRotation: 5);
     
         // Mars
         let marsName = planets[3]
-        createPlanet(name: marsName, positionPlanet: SCNVector3(1,0,0), timeRotation: 12, radius: 0.04 )
+        createPlanet(name: marsName, positionPlanet: SCNVector3(1.4,0,0), timeRotation: 12, radius: 0.024, hasRings: false)
 
         // Jupiter
         let jupiterName = planets[4]
-        createPlanet(name: jupiterName, positionPlanet: SCNVector3(1.2,0,0), timeRotation: 14, radius: 0.08)
+        createPlanet(name: jupiterName, positionPlanet: SCNVector3(2.1,0,0), timeRotation: 14, radius: 0.25, hasRings: true)
         
         // Saturn
         let saturnName = planets[5]
-        createPlanet(name: saturnName, positionPlanet: SCNVector3(1.6,0,0), timeRotation: 16, radius: 0.15)
-        
+        createPlanet(name: saturnName, positionPlanet: SCNVector3(3,0,0), timeRotation: 16, radius: 0.2, hasRings: true)
+
         // Uranus
         let uranusName = planets[6]
-        createPlanet(name: uranusName, positionPlanet: SCNVector3(1.9,0,0), timeRotation: 18, radius: 0.1)
+        createPlanet(name: uranusName, positionPlanet: SCNVector3(3.6,0,0), timeRotation: 18, radius: 0.1, hasRings: true)
         
         // Neptune
         let neptuneName = planets[7]
-        createPlanet(name: neptuneName, positionPlanet: SCNVector3(2.3,0,0), timeRotation: 20, radius: 0.1)
+        createPlanet(name: neptuneName, positionPlanet: SCNVector3(4,0,0), timeRotation: 20, radius: 0.018, hasRings: true)
         
         // Pluto
         let plutoName = planets[8]
-        createPlanet(name: plutoName, positionPlanet: SCNVector3(2.5,0,0), timeRotation: 22, radius: 0.02)
+        createPlanet(name: plutoName, positionPlanet: SCNVector3(4.3,0,0), timeRotation: 22, radius: 0.05, hasRings: false)
         
     }
 }

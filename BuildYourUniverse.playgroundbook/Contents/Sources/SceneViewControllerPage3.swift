@@ -35,10 +35,10 @@ extension SceneViewController {
             return
         }
         
-        let earth = createPlanetNode(geometry: SCNSphere(radius: 0.1), diffuse: UIImage(named: "\(earthName)Texture.jpg")!, specular: UIImage(named: "\(earthName)Specular.tif")!, emission: UIImage(named: "\(earthName)CloudsTexture.jpg")!, normal: UIImage(named: "\(earthName)Normal.tif")!, position: SCNVector3(0.8,0,0))
+        let earth = createPlanetNode(geometry: SCNSphere(radius: radius), diffuse: UIImage(named: "\(earthName)Texture.jpg")!, specular: UIImage(named: "\(earthName)Specular.tif")!, emission: UIImage(named: "\(earthName)CloudsTexture.jpg")!, normal: UIImage(named: "\(earthName)Normal.tif")!, position: position)
         
         earth.name = earthName
-        let earthRotation = Rotation(time: 7)
+        let earthRotation = Rotation(time: timeRotation)
         earth.runAction(earthRotation)
         
         if let earthEx = earthParent.childNode(withName: earthName, recursively: false) {
