@@ -1,12 +1,13 @@
 /*:
-  # **Let's go to discover the Solar System**.
+ # **Let's go to discover the Solar System**.
+ 
  Now you have all instruments and acknowledgements to **create** the Solar System.
  
- It has made of eight planets: `Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune`. We add also `Pluto`, it was considered ad planet but now it's a nano-planet.
+ It has made of eight planets: `Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune`. We add also `Pluto`, it was considered as a planet but now it's a *nano-planet*.
  
  Explore it all, try to catch the differences between them such as the colours, the velocity of rotation and the sizes.
  
- Now our trip is not ended, remember the life is full of surprise. `Go and look for the one reserved for you.`
+ Our trip is not ended, remember the life is full of surprise. `Go and look for the one reserved for you.`
  */
 //#-hidden-code
 import PlaygroundSupport

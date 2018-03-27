@@ -19,28 +19,24 @@ public class InitialPageViewController: UIViewController {
     
         // Do a simple check
         guard isARWorldTrackingSupported else {
-            // TODO: Unsupported Message
             return
         }
         
         // Do the request to access to the camera
-        AVCaptureDevice.requestAccess(for: .video) { (granted) in
-            // TODO: Give access to the camera: Message
+        AVCaptureDevice.requestAccess(for: .video) { (_) in
         }
     }
     
     // MARK: - Functions
     func startTimeTravel() {
-
         // Do a simple check
-//        guard ARWorldTrackingConfiguration.isSupported else { return }
-//        view.backgroundColor = UIColor.white
+        guard ARWorldTrackingConfiguration.isSupported else { return }
+
         // Create a ARSCNView and set the constraints
         let sceneView = ARSCNView(frame: view.frame)
         sceneView.session = ARSession()
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         
-        // TODO: Hide the image of  Copernicus
         view.addSubview(sceneView)
         
         NSLayoutConstraint.activate([
@@ -53,8 +49,6 @@ public class InitialPageViewController: UIViewController {
         let configuration = ARWorldTrackingConfiguration()
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         sceneView.autoenablesDefaultLighting = true
-        
-
     }
 }
 

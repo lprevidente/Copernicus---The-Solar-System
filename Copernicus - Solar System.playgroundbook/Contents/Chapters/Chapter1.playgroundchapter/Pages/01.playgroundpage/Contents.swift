@@ -1,13 +1,13 @@
 /*:
    # **A Bit of History**
  
- It was way back in 1543 when a polish astrologist with name *Nicolaus Copernicus*, went against the thoughts of the period which saw the Earth as the centre of the universe, known as the geocentric theory, that combined Aristotle's cosmological system with astronomical one of Ptolemy.
+ It was way back in 1543 when a polish astrologist, *Nicolaus Copernicus*, went against the geocentric theory of the period which saw the Earth as the centre of the universe.
  
- He wasn't the first person to formulate the idea, in fact, the heliocentric theory dates back to 300 b.C with greek astronomist, but Nicolaus was the fist that was able to prove it with mathematics procedures, reversing completely the concept on which the people and scientist were rooted.
+ Although the heliocentric theory was conceived by a greek astronomist in 300 BC, Nicolaus was the first to provide a mathematical proof of it, subverting the concept on which people and scientists were rooted.
  
- We start our journey from here, we came back with a **travel time** in the XVI century, trying to walk down the same path that Nicolaus made during his formulation and demonstration of his theory.
+ Let's start our journey going back with a **time travel machine** in the XVI century, trying to walk down the same path that Nicolaus made during his studies.
  
- You must be excited to start, so write down the right code and go.
+Do you want to start? Just write down the right line of code and go.
  */
 //#-hidden-code
 import PlaygroundSupport

@@ -18,29 +18,15 @@
 		<array>
 			<dict>
 				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/ResultInfo.plist</string>
-			</dict>
-			<dict>
-				<key>File</key>
 				<string>Chapters/Chapter1.playgroundchapter/Pages/01.playgroundpage/ResultInfo.plist</string>
 			</dict>
 			<dict>
 				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/03.playgroundpage/ResultInfo.plist</string>
-			</dict>
-			<dict>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/04.playgroundpage/ResultInfo.plist</string>
+				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/ResultInfo.plist</string>
 			</dict>
 		</array>
 		<key>Modified</key>
 		<array>
-			<dict>
-				<key>Diff</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/Contents.swift.delta</string>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/Contents.swift</string>
-			</dict>
 			<dict>
 				<key>Diff</key>
 				<string>Chapters/Chapter1.playgroundchapter/Pages/01.playgroundpage/Contents.swift.delta</string>
@@ -49,15 +35,9 @@
 			</dict>
 			<dict>
 				<key>Diff</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/03.playgroundpage/Contents.swift.delta</string>
+				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/Contents.swift.delta</string>
 				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/03.playgroundpage/Contents.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/04.playgroundpage/Contents.swift.delta</string>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/04.playgroundpage/Contents.swift</string>
+				<string>Chapters/Chapter1.playgroundchapter/Pages/02.playgroundpage/Contents.swift</string>
 			</dict>
 		</array>
 		<key>Removed</key>

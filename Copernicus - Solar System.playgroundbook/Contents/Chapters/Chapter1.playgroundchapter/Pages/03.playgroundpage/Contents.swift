@@ -1,15 +1,16 @@
 /*:
-  # **Now it's turn of Earth**
+ # **Now it's turn of Earth**
  
- Passing from this new theory, what happened to our Earth? Well, it continues to play a central role in the system. How?
+ And our Earth? Well, it continues to play a central role in the system.
  
- I've been inaccurate because all planets rotate around the centre or earth's orbit, that is the `centre` of Solar System.
+ All planets rotate around the centre of earth's orbit, that is the `centre` of Solar System.
  
- The Earth has a `motion of revolutions` around the Sun, or rather around the centre of his orbit and also a `motion around its axis`.
+ The Earth has a `motion of revolutions` around the Sun, or rather around the centre of his orbit and, also a `motion around its axis`.
  
- To pass to next stage you need to follow to step.:
+ The steps to follow are:
  1. **Create a reference** to the centre of orbit, for our simplicity, is the centre of the sun.
  2. **Create the Earth** and put it on movements as you've made before.
+ 
  */
 //#-hidden-code
 import PlaygroundSupport
