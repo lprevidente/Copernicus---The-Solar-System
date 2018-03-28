@@ -1,5 +1,6 @@
 import ARKit
 import UIKit
+import Foundation
 
 @available(iOS 11.0, *)
 extension SceneViewController {
@@ -96,33 +97,33 @@ extension SceneViewController {
     
     func createSolarSystem() {
         // Sun
-        createSun(radius: 0.35, position: SCNVector3(-0.5,-0.5,-1));
+        createSun(radius: 0.35, position: SCNVector3(0,0,-2));
         setTextureToSun(sendMessage: false);
         setSpeedRotationToSun(speedRotation: 3, sendMessage: false)
         
         // Mercury
         let mercuryName = planets[0]
-        createPlanet(name: mercuryName , positionPlanet: SCNVector3(0.6,0,0), timeRotation: 6, radius: 0.02, hasRings: false)
+        createPlanet(name: mercuryName , positionPlanet: SCNVector3(0.7,0,0), timeRotation: 6, radius: 0.02, hasRings: false)
         
         // Venus
         let venusName = planets[1]
-        createPlanet(name: venusName, positionPlanet: SCNVector3(0.8,0,0), timeRotation: 8, radius: 0.06, hasRings: false)
-        
+        createPlanet(name: venusName, positionPlanet: SCNVector3(0.9,0,0), timeRotation: 8, radius: 0.06, hasRings: false)
+
         // Earth
         createParentEarth(timeRotation: 10)
-        createEarth(radius: 0.07, position: SCNVector3(1.1, 0, 0), timeRotation: 7, needTorus: true)
-        
+        createEarth(radius: 0.07, position: SCNVector3(1.2, 0, 0), timeRotation: 7, needTorus: true)
+
         // Create Moon
         createMoon(radius: 0.018, position: SCNVector3(0, 0, 0.15), timeRotation: 5);
-    
+
         // Mars
         let marsName = planets[3]
-        createPlanet(name: marsName, positionPlanet: SCNVector3(1.4,0,0), timeRotation: 12, radius: 0.03, hasRings: false)
+        createPlanet(name: marsName, positionPlanet: SCNVector3(1.5,0,0), timeRotation: 12, radius: 0.03, hasRings: false)
 
         // Jupiter
         let jupiterName = planets[4]
-        createPlanet(name: jupiterName, positionPlanet: SCNVector3(2.1,0,0), timeRotation: 14, radius: 0.25, hasRings: true)
-        
+        createPlanet(name: jupiterName, positionPlanet: SCNVector3(2.2,0,0), timeRotation: 14, radius: 0.25, hasRings: true)
+
         // Saturn
         let saturnName = planets[5]
         createPlanet(name: saturnName, positionPlanet: SCNVector3(3,0,0), timeRotation: 16, radius: 0.2, hasRings: true)
@@ -130,11 +131,11 @@ extension SceneViewController {
         // Uranus
         let uranusName = planets[6]
         createPlanet(name: uranusName, positionPlanet: SCNVector3(3.6,0,0), timeRotation: 18, radius: 0.1, hasRings: true)
-        
+
         // Neptune
         let neptuneName = planets[7]
         createPlanet(name: neptuneName, positionPlanet: SCNVector3(4,0,0), timeRotation: 20, radius: 0.1, hasRings: true)
-        
+
         // Pluto
         let plutoName = planets[8]
         createPlanet(name: plutoName, positionPlanet: SCNVector3(4.3,0,0), timeRotation: 22, radius: 0.012, hasRings: false)

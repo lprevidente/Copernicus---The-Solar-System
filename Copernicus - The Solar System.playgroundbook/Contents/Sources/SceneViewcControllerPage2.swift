@@ -7,8 +7,11 @@ extension SceneViewController {
     
     // MARK: - Functions For the Sun
     func createSun(radius: CGFloat, position: SCNVector3) {
-        // TODO: Check on value
-        // TODO: Add only after that the scanning is completed
+        
+        if ( radius >= 3 ) {
+            statusViewController.show(message: tooBig )
+            return
+        }
         let sun = SCNNode(geometry: SCNSphere(radius: radius))
         sun.name = sunName
         sun.position = position
@@ -20,20 +23,20 @@ extension SceneViewController {
         }
     }
     
-    func setTextureToSun() {
+    func setTextureToSun(sendMessage: Bool) {
         guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)
             return
         }
         sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "\(sunName)Texture.jpg")
         
-        if sun.hasActions {
+        if sun.hasActions, sendMessage {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
         }
     }
     
     // Give rotation to Sun
-    func setSpeedRotationToSun(speedRotation: Int){
+    func setSpeedRotationToSun(speedRotation: Int, sendMessage: Bool){
         guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)
             return
@@ -54,7 +57,8 @@ extension SceneViewController {
             sun.removeAction(forKey: "\(sunName)Rotation")
         }
         sun.runAction(sunAction, forKey: "\(sunName)Rotation")
-        if (sun.geometry?.firstMaterial?.diffuse.contents) != nil {
+        // Check if the Sun has a Texture
+        if (sun.geometry?.firstMaterial?.diffuse.contents) != nil, sendMessage {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
         }
     }
@@ -93,7 +97,7 @@ extension SceneViewController {
         }
         if sun.hasActions {
             self.speedRotation += 1
-            setSpeedRotationToSun(speedRotation: self.speedRotation)
+            setSpeedRotationToSun(speedRotation: self.speedRotation, sendMessage: true)
         }
     }
     
@@ -103,10 +107,10 @@ extension SceneViewController {
             return
         }
         if !sun.hasActions {
-            setSpeedRotationToSun(speedRotation: 10)
+            setSpeedRotationToSun(speedRotation: 10, sendMessage: true)
         } else {
             self.speedRotation += -1
-            setSpeedRotationToSun(speedRotation: self.speedRotation)
+            setSpeedRotationToSun(speedRotation: self.speedRotation, sendMessage: true)
         }
     }
 }

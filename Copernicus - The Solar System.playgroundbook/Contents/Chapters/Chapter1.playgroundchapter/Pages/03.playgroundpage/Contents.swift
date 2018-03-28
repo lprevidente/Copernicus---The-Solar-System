@@ -35,7 +35,7 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         guard let liveViewMessage = MessageFromLiveViewToContents(playgroundValue: message) else { return }
         switch liveViewMessage {
         case .succeeded:
-            page.assessmentStatus = .pass(message: "Oh! Finally we have the Earth [Next](@next)")
+            page.assessmentStatus = .pass(message: "Oh! Finally we have the Earth. [Next](@next)")
         default:
             break
         }
