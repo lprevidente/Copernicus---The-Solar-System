@@ -22,6 +22,8 @@ func startTimeTravel() {
     proxy?.send(MessageFromContentsToLiveView.startTimeTravel.playgroundValue)
     page.assessmentStatus = .pass(message: "Well, then our journey shall begin. [Go](@next) ")
 }
+page.assessmentStatus = PlaygroundPage.AssessmentStatus.fail(hints: ["You dont' know what to do?"], solution: "Write startTimeTravel() and you can start the journey.")
+
 //#-code-completion(everything, hide)
 //#-code-completion(identifier, show, startTimeTravel())
 //#-end-hidden-code

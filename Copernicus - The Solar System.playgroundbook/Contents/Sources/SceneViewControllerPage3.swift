@@ -35,6 +35,7 @@ extension SceneViewController {
     func createEarth(radius: CGFloat, position: SCNVector3, timeRotation: TimeInterval, needTorus: Bool) {
         let earthName: String = planets[2]
         guard let earthParent = self.sceneView.scene.rootNode.childNode(withName: "\(earthName)Parent", recursively: false) else {
+            self.send(MessageFromLiveViewToContents.failed.playgroundValue)
             statusViewController.show(message: somethingIsMissing)
             return
         }

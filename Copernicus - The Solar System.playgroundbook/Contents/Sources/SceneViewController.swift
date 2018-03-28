@@ -25,7 +25,7 @@ public class SceneViewController: UIViewController {
     public let tooSpeed = "Too Fast 🏎"
     public let tooSlow = "Too Slow 🐌"
     public let somethingIsMissing = "Something is missing 🧐"
-    public let tooBig = "May it's too Big ☀️ "
+    public let tooBig = "Maybe it's too Big ☀️ "
     
     let sunName = "Sun"
     // An Array of planets

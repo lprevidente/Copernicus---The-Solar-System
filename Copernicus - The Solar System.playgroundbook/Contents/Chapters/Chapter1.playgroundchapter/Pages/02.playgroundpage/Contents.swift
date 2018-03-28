@@ -29,6 +29,7 @@ func setTextureToSun() {
 func setSpeedRotationToSun(speedRotation: Int) {
     proxy?.send(MessageFromContentsToLiveView.setSpeedRotationToSun(speedRotation: speedRotation).playgroundValue)
 }
+let hints : [String] = ["Radius is in meters. I suggest you to don't use a big number. SCNVector3 has 3 parameters: x, y, z.", "Have you put the texture on the Sun and the rotation?", "Have you found the second way?"]
 
 // Handle messages from the live view.
 class Listener: PlaygroundRemoteLiveViewProxyDelegate {
@@ -37,8 +38,9 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         guard let liveViewMessage = MessageFromLiveViewToContents(playgroundValue: message) else { return }
         switch liveViewMessage {
         case .succeeded:
-            page.assessmentStatus = .pass(message: "Now we have a beautiful sun! [Next](@next) ")
-        default:
+            page.assessmentStatus = .pass(message: "Now we have a beautiful sun! [Next](@next)")
+        case .failed:
+            page.assessmentStatus = .fail(hints: hints, solution: "Try to swipe left and right. See what happens")
             break
         }
     }

@@ -21,6 +21,10 @@ extension SceneViewController {
         } else {
             self.sceneView.scene.rootNode.addChildNode(sun)
         }
+        
+        if !sun.hasActions, let texutureColor = sun.geometry?.firstMaterial?.diffuse.contents as? UIColor {
+            self.send(MessageFromLiveViewToContents.failed.playgroundValue)
+        }
     }
     
     func setTextureToSun(sendMessage: Bool) {
@@ -32,6 +36,8 @@ extension SceneViewController {
         
         if sun.hasActions, sendMessage {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
+        } else if sendMessage {
+            self.send(MessageFromLiveViewToContents.failed.playgroundValue)
         }
     }
     
@@ -58,8 +64,10 @@ extension SceneViewController {
         }
         sun.runAction(sunAction, forKey: "\(sunName)Rotation")
         // Check if the Sun has a Texture
-        if (sun.geometry?.firstMaterial?.diffuse.contents) != nil, sendMessage {
+        if let texutureColor = sun.geometry?.firstMaterial?.diffuse.contents as? UIImage, sendMessage {
             self.send(MessageFromLiveViewToContents.succeeded.playgroundValue)
+        } else if sendMessage {
+            self.send(MessageFromLiveViewToContents.failed.playgroundValue)
         }
     }
     

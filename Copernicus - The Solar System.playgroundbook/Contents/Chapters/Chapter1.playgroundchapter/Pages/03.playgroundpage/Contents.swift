@@ -36,7 +36,8 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         switch liveViewMessage {
         case .succeeded:
             page.assessmentStatus = .pass(message: "Oh! Finally we have the Earth. [Next](@next)")
-        default:
+        case .failed:
+            page.assessmentStatus = .fail(hints: ["You need to create a reference to the centre of the Sun before creating the Earth"], solution: nil)
             break
         }
     }
