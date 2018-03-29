@@ -46,7 +46,6 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
 
         case .createSolarSystem:
             return .createSolarSystem
-            
         }
     }
     
@@ -54,7 +53,7 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
     public init?(messageType: MessageType, parametersEncoded: Data?) {
         let decoder = JSONDecoder()
         
-        // If there is parameters, I'll get them
+        // If there are parameters, I'll get them
         switch messageType {
             
         case .startTimeTravel:
@@ -87,7 +86,6 @@ public enum MessageFromContentsToLiveView: PlaygroundMessage {
 
         case .createSolarSystem:
             self = .createSolarSystem
-
         }
     }
     

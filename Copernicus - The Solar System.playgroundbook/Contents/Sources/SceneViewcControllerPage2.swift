@@ -27,6 +27,7 @@ extension SceneViewController {
         }
     }
     
+    // Set the texture on the Sun
     func setTextureToSun(sendMessage: Bool) {
         guard let sun = self.sceneView.scene.rootNode.childNode(withName: sunName, recursively: false) else {
             statusViewController.show(message: whereIsTheSun)

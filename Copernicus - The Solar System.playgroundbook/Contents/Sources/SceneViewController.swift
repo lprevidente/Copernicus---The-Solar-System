@@ -5,6 +5,7 @@ import PlaygroundSupport
 @objc(SceneViewController)
 @available(iOS 11.0, *)
 public class SceneViewController: UIViewController {
+    
     // MARK: - Outlets
     @IBOutlet weak var sceneView: ARSCNView! {
         didSet{
@@ -71,7 +72,6 @@ public class SceneViewController: UIViewController {
         
         // Every time the view appear I reset the configuration
         let configuration = ARWorldTrackingConfiguration()
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         sceneView.session.run(configuration ,options: [.resetTracking, .removeExistingAnchors])
         
         statusViewController.show(message: scanEnvoiroment)

@@ -6,7 +6,7 @@ extension SceneViewController {
     
     // First I need to create a Parent Node for Earth. Its positions is the centre of the Sun
     func createParentEarth(timeRotation: TimeInterval) {
-        // This is the previouslys
+        // Sun creation
         createSun(radius: 0.35, position: SCNVector3(0,0,-2))
         setTextureToSun(sendMessage: false)
         setSpeedRotationToSun(speedRotation: 8, sendMessage: false)
