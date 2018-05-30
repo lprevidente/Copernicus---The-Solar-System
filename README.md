@@ -1,4 +1,4 @@
-# Nicolas - The Solar System
+# Copernicus - The Solar System
 This is the playground with which I won the WWDC18 Scolarship. With this playground I wanted to combine Astronomy with Coding, with, of course, the help of Nicolaus Copernicus. It guides the users to the creation of the Solar System throught the Augmented Reality. 
 
 ## What do you need?
